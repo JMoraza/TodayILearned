@@ -32,6 +32,7 @@ y = dataset.iloc[:,-1].values
 print(x)
 print(y)
 
+
 #Taking care of missing data
   ##Missing data could cause errors when training your model.
   ##Option, remove incomplete data if sample data is large.
@@ -49,3 +50,21 @@ x[:,1:3] = imputer.transform(x[:,1:3])
 ##This returns original matrix x with the new averaged values populated in age & salary column.
 print(x)
 
+
+#Encoding categorical data
+##Categorical variables must be converted to numerical variables in order to use
+##in the ML algorithm - this method is called one-hot encoding. 
+
+##Encoding the independent variables
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+##Note, the country column is converted into a numerical array to prevent a numerical order.
+CT = ColumnTransformer(transformers=[('encoder',OneHotEncoder(),[0])],remainder='passthrough')
+x = np.array(CT.fit_transform(x))
+print(x)
+
+##Encoding the dependent variable
+from sklearn.preprocessing import LabelEncoder
+LE = LabelEncoder()
+y = LE.fit_transform(y)
+print(y)
