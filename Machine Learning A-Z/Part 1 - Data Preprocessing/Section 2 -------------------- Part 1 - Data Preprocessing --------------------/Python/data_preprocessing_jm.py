@@ -68,3 +68,33 @@ from sklearn.preprocessing import LabelEncoder
 LE = LabelEncoder()
 y = LE.fit_transform(y)
 print(y)
+
+#Splitting the training set and test set
+##Training set consists of existing data used to train your model while the test set is used 
+##for testing the accuracy of the model and obtaining new observations. 
+##This is the expected format.
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 1)
+##test_size is 20% of data, 80% of data becomes part of training sample.
+##random_state = 1 ensures data is split randomly between training and testing samples.
+print(x_train)
+print(x_test)
+print(y_train)
+print(y_test)
+
+
+#Feature scaling
+##Scaling the feature variables to ensure all variables are in the same range and
+##one variable does not dominate another and is neglected.
+##There are two techniques, standardization and normalization
+from sklearn.preprocessing import StandardScaler
+SC = StandardScaler()
+##Note, we don't apply StandardScalar() to country column because the identifier/array
+##already has values between -3 and +3 (it would mess up identifier).
+x_train[:, 3:] = SC.fit_transform(x_train[:, 3:]) 
+x_test[:, 3:] = SC.transform(x_test[:, 3:])
+##Note, we apply the same scalars (mean and std. dev.) from training data to test data
+##to maintain relativity.
+print(x_train)
+print(x_test)
+
