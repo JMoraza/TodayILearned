@@ -61,3 +61,12 @@ plt.title('Experience vs. Salary (Testing Set)')
 plt.xlabel('Years of Experience')
 plt.ylabel('Salary')
 plt.show()
+
+#BONUS
+
+#How to predict the salary of a person with 12 years of experience using the model.
+print(LR.predict([[12]]))
+
+#How to obtain the coefficients of the model.
+print(LR.coef_)
+print(LR.intercept_)
